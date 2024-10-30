@@ -52,6 +52,14 @@ export const defaultContentPageLayout: PageLayout = {
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
+  afterBody: [
+    // Ideally, I'd like to have this on the "Home" page, or not include a
+    // self-reference in other content pages.
+    Component.RecentNotes({
+      // The least interesting notes are indexes, so exclude them.
+      filter: (f) => !f.filePath.endsWith("/index.md"),
+    }),
+  ],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
